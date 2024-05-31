@@ -62,12 +62,12 @@
   <color name="divider">#1E000000</color>
   <color name="divider_night">#1EFFFFFF</color>
   
-  <color name="logo">#006C35</color>
+  <color name="logo">#591544</color>
 
   <!-- Backgrounds -->
   <color name="bg_window">#FFEEEEEE</color>
   <color name="bg_window_night">#FF32363A</color>
-  <color name="bg_primary">#006C35</color>
+  <color name="bg_primary">#591544</color>
   <color name="bg_primary_night">#1E2226</color>
   <color name="bg_cards">@android:color/white</color>
   <color name="bg_cards_night">#FF3C4044</color>
@@ -82,7 +82,7 @@
   <color name="bg_menu">#CCFFFFFF</color>
   <color name="bg_menu_night">#CC2D3237</color>
 
-  <color name="bg_statusbar">#004120</color>
+  <color name="bg_statusbar">#591544</color>
   <color name="bg_statusbar_translucent">#66000000</color>
   <color name="bg_statusbar_night">#121417</color>
 

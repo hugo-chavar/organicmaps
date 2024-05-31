@@ -81,8 +81,8 @@ def getCommitMessage() {
 
 def osName = System.properties['os.name'].toLowerCase()
 
-project.ext.appId = 'app.organicmaps'
-project.ext.appName = 'Organic Maps'
+project.ext.appId = 'app.bordergis'
+project.ext.appName = 'Tranqueras Conectadas'
 
 // I have Java 21 installed, but this doesn't work on MacOS.
 //java {
