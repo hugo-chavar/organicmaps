@@ -67,6 +67,8 @@
 	<string name="pause">Pause</string>
 	<!-- REMOVE THIS STRING AFTER REFACTORING -->
 	<string name="continue_download">Continue</string>
+	<!-- REMOVE THIS STRING AFTER REFACTORING -->
+	<string name="continue_button">Davam et</string>
 	<!-- Show popup notification on top of the map when country download has failed. -->
 	<string name="download_country_failed">%s download has failed</string>
 	<!-- "Add new bookmark list" dialog title -->
@@ -207,6 +209,8 @@
 	<!-- Data version in «About» screen, %@ is replaced by a local, human readable date. -->
 	<string name="data_version">OpenStreetMap data: %s</string>
 	<!-- Confirmation in downloading countries dialog -->
+	<!-- Confirmation for OpenStreetMap log out. -->
+	<string name="osm_log_out_confirmation">Are you sure you want to log out of your OpenStreetMap account?</string>
 	<string name="are_you_sure">Are you sure you want to continue?</string>
 	<!-- Title for tracks category in bookmarks manager -->
 	<string name="tracks_title">Tracks</string>
@@ -303,6 +307,8 @@
 	<string name="compass_calibration_recommended">Improve arrow direction by moving the phone in a figure-eight motion to calibrate the compass.</string>
 	<!-- Toast text when compass calibration may improve the correctness of the current position arrow -->
 	<string name="compass_calibration_required">Move the phone in a figure-eight motion to calibrate the compass and fix the arrow direction on the map.</string>
+	<!-- Toast text when user hides UI with a long tap anywhere on the map -->
+	<string name="long_tap_toast">Long-tap on the map again to see the interface</string>
 	<!-- Update all button text -->
 	<string name="downloader_update_all_button">Update All</string>
 	<!-- Cancel all button text -->
@@ -404,7 +410,7 @@
 	<string name="dialog_routing_try_again">Please try again</string>
 	<string name="dialog_routing_download_and_build_cross_route">Would you like to download the map and create a more optimal route spanning more than one map?</string>
 	<string name="dialog_routing_download_cross_route">Download additional maps to create a better route that crosses the boundaries of this map.</string>
-
+	<string name="not_now">Not Now</string>
 	<!-- SECTION: Strings for downloading map from search -->
 	<string name="search_without_internet_advertisement">To start searching and creating routes, please download the map. After that you will no longer need an Internet connection.</string>
 	<string name="search_select_map">Select Map</string>
@@ -493,6 +499,8 @@
 	<string name="email_or_username">Email or username</string>
 	<string name="editor_add_phone">Add Phone</string>
 	<string name="level">Floor</string>
+	<!-- Building level -->
+	<string name="level_value_generic">Level: %s</string>
 	<string name="downloader_delete_map_dialog">All of your map edits will be deleted with the map.</string>
 	<string name="downloader_update_maps">Update Maps</string>
 	<string name="downloader_mwm_migration_dialog">To create a route, you need to update all maps and then plan the route again.</string>
@@ -515,6 +523,10 @@
 	<string name="message_invalid_feature_position">No object can be located here</string>
 	<!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
 	<string name="osm_presentation">Community-created OpenStreetMap data as of %s. Learn more about how to edit and update the map at OpenStreetMap.org</string>
+	<!-- Status message indicating that user did not login to OSM profile yet. -->
+	<string name="not_signed_in">Not signed in</string>
+	<!-- OSM explanation on Android login screen -->
+	<string name="login_osm_presentation"></string>
 	<string name="login_to_make_edits_visible">Log in to openstreetmap.org to publish your changes to the world.</string>
 	<!-- Downloaded 10 **of** 20 <- it is that "of" -->
 	<string name="downloader_of">%1$d of %2$d</string>
@@ -529,14 +541,20 @@
 	<!-- Place Page title for long tap -->
 	<string name="core_placepage_unknown_place">Unknown Place</string>
 	<string name="editor_other_info">Send a note to OSM editors</string>
+	<!-- Hint of the input field in the OSM note section of the editor -->
+	<string name="editor_note_hint">Describe errors on the map or things that cannot be edited with Organic Maps.</string>
 	<string name="editor_detailed_description_hint">Detailed comment</string>
 	<string name="editor_detailed_description">Your suggested map changes will be sent to the OpenStreetMap community. Please describe any additional details that cannot be edited in Organic Maps.</string>
+	<string name="editor_about_osm">Your edits are uploaded to the public <a href="https://wiki.openstreetmap.org/wiki/About_OpenStreetMap">OpenStreetMap</a> database. Please do not add personal or copyrighted information.</string>
 	<string name="editor_more_about_osm">More about OpenStreetMap</string>
 	<string name="editor_operator">Owner</string>
+	<!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
+	<string name="operator">Operador: %s</string>
 	<string name="editor_category_unsuitable_title">Can\'t find a suitable category?</string>
 	<string name="editor_category_unsuitable_text">Organic Maps allows to add simple point categories only, that means no towns, roads, lakes, building outlines, etc. Please add such categories directly to <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Check our <a href="https://organicmaps.app/faq/editing/advanced-map-editing">guide</a> for detailed step by step instructions.</string>
 	<string name="downloader_no_downloaded_maps_title">You haven\'t downloaded any maps</string>
 	<string name="downloader_no_downloaded_maps_message">Download maps to search and navigate offline.</string>
+	<string name="current_location_unknown_error_title">Current location is unknown.</string>
 	<!-- abbreviation for meters -->
 	<string name="m">m</string>
 	<!-- abbreviation for kilometers -->
@@ -582,6 +600,8 @@
 	<string name="editor_share_to_all_dialog_message_1">Make sure you did not enter any private or personal data.</string>
 	<string name="editor_share_to_all_dialog_message_2">OpenStreetMap editors will check the changes and contact you if they have any questions.</string>
 	<string name="navigation_stop_button">Stop</string>
+	<!-- Shown as toast when starting the recent track recording -->
+	<string name="track_recording">Record Track</string>
 	<!-- For the first routing -->
 	<string name="accept">Accept</string>
 	<!-- For the first routing -->
@@ -625,6 +645,9 @@
 	<!-- Do not display all bookmark lists on the map -->
 	<string name="bookmark_lists_hide_all">Hide all</string>
 	<string name="bookmark_lists_show_all">Show all</string>
+	<plurals name="bookmarks_places">
+		<item quantity="other">%d bookmarks</item>
+	</plurals>
 	<string name="bookmarks_create_new_group">Create a new list</string>
 	<!-- Bookmark categories screen, button that opens folder selection dialog to import KML/KMZ/GPX/KMB files -->
 	<string name="bookmarks_import">Import Bookmarks and Tracks</string>
@@ -639,17 +662,18 @@
 	<string name="please_wait">Please wait…</string>
 	<string name="phone_number">Phone number</string>
 	<string name="profile">OpenStreetMap profile</string>
+	<string name="restore">Restore</string>
 	<plurals name="bookmarks_detect_message">
-	  <item quantity="one">%d file was found. You can see it after conversion.</item>
-	  <item quantity="other">%d files were found. You can see them after conversion.</item>
+		<item quantity="one">%d file was found. You can see it after conversion.</item>
+		<item quantity="other">%d files were found. You can see them after conversion.</item>
 	</plurals>
 	<plurals name="objects">
-	  <item quantity="one">%d object</item>
-	  <item quantity="other">%d objects</item>
+		<item quantity="one">%d object</item>
+		<item quantity="other">%d objects</item>
 	</plurals>
 	<plurals name="places">
-	  <item quantity="one">%d place</item>
-	  <item quantity="other">%d places</item>
+		<item quantity="one">%d place</item>
+		<item quantity="other">%d places</item>
 	</plurals>
 	<plurals name="tracks">
 	  <item quantity="one">%d track</item>
@@ -715,6 +739,8 @@
 	<string name="no_available">No</string>
 	<!-- To indicate the capacity of car parkings, bicycle parkings, electric vehicle charging stations... -->
 	<string name="capacity">Capacity: %s</string>
+	<!-- To indicate the network of ATMs, bicycle rentals, electric vehicle charging stations... -->
+	<string name="network">Network: %@</string>
 	<string name="trip_finished">You have arrived!</string>
 	<string name="ok">OK</string>
 	<!-- max. 10 symbols, both iOS and Android -->
@@ -787,10 +813,14 @@
 	<string name="enable_show_on_lock_screen">Show on the lock screen</string>
 	<!-- Description in preferences -->
 	<string name="enable_show_on_lock_screen_description">When enabled, the app will work on the lockscreen even when the device is locked.</string>
+	<!-- Current language of the map! -->
+	<string name="change_map_locale">Map language</string>
 	<!-- OpenStreetMap text on splash screen -->
 	<string name="splash_subtitle">Map data from OpenStreetMap</string>
 	<!-- Telegram group url for the "?" About page -->
 	<string name="telegram_url">https://t.me/OrganicMapsApp</string>
+	<!-- A link to the TTS FAQ -->
+	<string name="tts_info_link">https://organicmaps.app/faq/text-to-speech-android-tts/</string>
 	<!-- Instagram account url for the "?" About page -->
 	<string name="instagram_url">https://www.instagram.com/organicmaps.app</string>
 	<!-- Translated Organic Maps site, add new translations here: https://github.com/organicmaps/organicmaps.github.io/tree/master/content -->
@@ -855,6 +885,34 @@
 	<string name="website_menu">Menu Link</string>
 	<!-- Button in the Place Page which opens a restaurant or other food place's menu in a browser -->
 	<string name="view_menu">View Menu</string>
+	<!-- Title for the "Open In Another App" button on the PlacePage. -->
+	<string name="open_in_app">Open In Another App</string>
+	<!-- To indicate if the place proposed self service... -->
+	<string name="self_service">Self-service</string>
+	<string name="select_option">Select option</string>
+	<!-- To indicate if restaurant or other place has outdoor seating -->
+	<string name="outdoor_seating">Outdoor seating</string>
+	<!-- Disclaimer summary shown when Power Saving Mode is enabled -->
+	<string name="power_save_dialog_summary">For the most accurate navigation, we recommend disabling power saving mode in phone\'s battery settings.</string>
+	<!-- Prompt to start recording a track. -->
+	<string name="start_track_recording">Record Track</string>
+	<!-- Prompt for stopping a track recording. -->
+	<string name="stop_track_recording">Stop Track Recording</string>
+	<!-- Title for the "Stop Without Saving" action for the alert when saving a track recording. -->
+	<string name="stop_without_saving">Stop Without Saving</string>
+	<!-- Title for the "Stop Without Saving" action for the alert when saving a track recording. -->
+	<string name="continue_recording">Continue Recording</string>
+	<!-- Title for the alert when saving a track recording. -->
+	<string name="track_recording_alert_title">Save into Bookmarks and Tracks?</string>
+	<!-- Message for the toast when saving the track recording is finished but nothing to save. -->
+	<string name="track_recording_toast_nothing_to_save">Track is empty - nothing to save</string>
+	<!-- Error message when there are no File Manager apps installed to select a folder when importing Bookmarks and Tracks -->
+	<string name="error_no_file_manager_app">Unable to display folder selection dialog because no suitable app is installed on your device. Please install a file manager app and try again.</string>
+	<string name="choose_color">Choose Color</string>
+	<string name="edit_track">Edit Track</string>
+	<string name="uri_open_location_failed">No App installed that can open the location</string>
+	<!-- preference string for using auto theme only in navigation mode -->
+	<string name="nav_auto">Auto in navigation</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.addr_interpolation">Address/Block</string>
@@ -1015,6 +1073,8 @@
 	<string name="type.amenity.shelter.lean_to">Lean-to Shelter</string>
 	<string name="type.amenity.public_bath">Public Bath</string>
 	<string name="type.amenity.shower">Shower</string>
+	<!-- https://wiki.openstreetmap.org/wiki/Key:social_facility -->
+	<string name="type.amenity.social_facility">Social Facility</string>
 	<string name="type.amenity.stripclub">Stripclub</string>
 	<string name="type.amenity.taxi">Taxi Stand</string>
 	<string name="type.amenity.telephone">Phone</string>
@@ -2201,5 +2261,5 @@
 	<string name="type.amenity.events_venue">Events Venue</string>
 	<string name="type.shop.auction">Auction</string>
 	<string name="type.shop.collector">Collectables</string>
-    <string name="about_tranqueras_conectadas">Tranqueras Conectadas Navigation is powered by Organic Maps</string>
+	<string name="about_tranqueras_conectadas">Tranqueras Conectadas Navigation is powered by Organic Maps</string>
 </resources>
