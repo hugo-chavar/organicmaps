@@ -30,7 +30,7 @@ public class SearchHistoryFragment extends BaseMwmRecyclerFragment<SearchHistory
   @Override
   protected SearchHistoryAdapter createAdapter()
   {
-    final SearchToolbarController controller = ((SearchFragment) requireParentFragment()).requireController();
+    final SearchToolbarController controller = ((TranquerasSearchFragment) requireParentFragment()).requireController();
     final boolean showMyPosition = (RoutingController.get().isWaitingPoiPick() &&
         LocationHelper.from(requireContext()).getMyPosition() != null);
     return new SearchHistoryAdapter(controller, showMyPosition);
@@ -60,6 +60,6 @@ public class SearchHistoryFragment extends BaseMwmRecyclerFragment<SearchHistory
     });
     updatePlaceholder();
 
-    ((SearchFragment) getParentFragment()).setRecyclerScrollListener(getRecyclerView());
+    ((TranquerasSearchFragment) getParentFragment()).setRecyclerScrollListener(getRecyclerView());
   }
 }

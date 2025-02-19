@@ -10,6 +10,7 @@ import androidx.annotation.StyleRes;
 import androidx.fragment.app.Fragment;
 import app.organicmaps.base.BaseMwmFragmentActivity;
 import app.organicmaps.util.ThemeUtils;
+import app.organicmaps.util.log.Logger;
 
 public class SearchActivity extends BaseMwmFragmentActivity
 {
@@ -44,6 +45,6 @@ public class SearchActivity extends BaseMwmFragmentActivity
   @Override
   protected Class<? extends Fragment> getFragmentClass()
   {
-    return SearchFragment.class;
+    return TranquerasSearchFragment.class;
   }
 }

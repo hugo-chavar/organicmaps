@@ -94,7 +94,7 @@ public class LocationHelper implements BaseLocationProvider.Listener
           fixed = true;
         }
       }
-      Logger.d(TAG, "total = " + status.getSatelliteCount() + " used = " + used + " fixed = " + fixed);
+//      Logger.d(TAG, "total = " + status.getSatelliteCount() + " used = " + used + " fixed = " + fixed);
     }
   };
 
@@ -194,7 +194,7 @@ public class LocationHelper implements BaseLocationProvider.Listener
   @Override
   public void onLocationChanged(@NonNull Location location)
   {
-    Logger.d(TAG, "provider = " + mLocationProvider.getClass().getSimpleName() + " location = " + location);
+//    Logger.d(TAG, "provider = " + mLocationProvider.getClass().getSimpleName() + " location = " + location);
 
     if (!isActive())
     {
@@ -212,7 +212,7 @@ public class LocationHelper implements BaseLocationProvider.Listener
     {
       if (!LocationUtils.isFromFusedProvider(location) && !LocationUtils.isLocationBetterThanLast(location, mSavedLocation))
       {
-        Logger.d(TAG, "The new " + location + " is worse than the last " + mSavedLocation);
+//        Logger.d(TAG, "The new " + location + " is worse than the last " + mSavedLocation);
         return;
       }
     }

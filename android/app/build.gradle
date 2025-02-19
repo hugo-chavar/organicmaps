@@ -404,6 +404,11 @@ dependencies {
   implementation 'com.google.guava:guava:33.3.0-android'
   implementation 'com.github.devnullorthrow:MPAndroidChart:3.2.0-alpha'
   implementation 'net.jcip:jcip-annotations:1.0'
+  implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+  implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+  implementation 'com.google.code.gson:gson:2.10.1'
+  implementation "androidx.room:room-runtime:2.6.1"
+  annotationProcessor "androidx.room:room-compiler:2.6.1"
 
   // Test Dependencies
   androidTestImplementation 'androidx.test.ext:junit:1.2.1'

@@ -90,7 +90,7 @@ import app.organicmaps.routing.RoutingPlanInplaceController;
 import app.organicmaps.search.FloatingSearchToolbarController;
 import app.organicmaps.search.SearchActivity;
 import app.organicmaps.search.SearchEngine;
-import app.organicmaps.search.SearchFragment;
+import app.organicmaps.search.TranquerasSearchFragment;
 import app.organicmaps.settings.DrivingOptionsActivity;
 import app.organicmaps.settings.RoadType;
 import app.organicmaps.settings.SettingsActivity;
@@ -151,7 +151,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
   public static final String EXTRA_UPDATE_THEME = "update_theme";
   private static final String EXTRA_CONSUMED = "mwm.extra.intent.processed";
 
-  private static final String[] DOCKED_FRAGMENTS = { SearchFragment.class.getName(),
+  private static final String[] DOCKED_FRAGMENTS = { TranquerasSearchFragment.class.getName(),
                                                      DownloaderFragment.class.getName(),
                                                      RoutingPlanFragment.class.getName(),
                                                      EditorHostFragment.class.getName(),
@@ -417,7 +417,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
     {
       final Bundle args = new Bundle();
       args.putString(SearchActivity.EXTRA_QUERY, query);
-      replaceFragment(SearchFragment.class, args, null);
+      replaceFragment(TranquerasSearchFragment.class, args, null);
     }
     else
     {
