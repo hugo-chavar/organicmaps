@@ -32,7 +32,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   public void onResultsUpdate(@NonNull final SearchResult[] results, final long timestamp)
   {
     // Here we get the list with the results, the listeners are updated
-    Logger.i("HUGO", "OK onResultsUpdate Hugo results: ");
+    Logger.i("HUGO Tranqueras", "OK onResultsUpdate Hugo results: ");
     UiThread.run(
         () ->
         {
@@ -46,7 +46,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   public void onResultsEnd(final long timestamp)
   {
     // the results are completed.. if the search is cancelled we don't need to do this
-    Logger.i("HUGO", "onResultsEnd Hugo results: ");
+    Logger.i("HUGO Tranqueras", "onResultsEnd Hugo results: ");
     UiThread.run(
         () ->
         {
@@ -59,7 +59,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   @Override
   public void onMapSearchResults(final NativeMapSearchListener.Result[] results, final long timestamp, final boolean isLast)
   {
-    Logger.i("HUGO", "onMapSearchResults Hugo results: ");
+    Logger.i("HUGO Tranqueras", "onMapSearchResults Hugo results: ");
     UiThread.run(
         () ->
         {
@@ -72,7 +72,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   @Override
   public void onBookmarkSearchResultsUpdate(@Nullable long[] bookmarkIds, long timestamp)
   {
-    Logger.i("HUGO", "onBookmarkSearchResultsUpdate Hugo results: ");
+    Logger.i("HUGO Tranqueras", "onBookmarkSearchResultsUpdate Hugo results: ");
     for (NativeBookmarkSearchListener listener : mBookmarkListeners)
       listener.onBookmarkSearchResultsUpdate(bookmarkIds, timestamp);
     mBookmarkListeners.finishIterate();
@@ -81,7 +81,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   @Override
   public void onBookmarkSearchResultsEnd(@Nullable long[] bookmarkIds, long timestamp)
   {
-    Logger.i("HUGO", "onBookmarkSearchResultsEnd Hugo results: ");
+    Logger.i("HUGO Tranqueras", "onBookmarkSearchResultsEnd Hugo results: ");
     for (NativeBookmarkSearchListener listener : mBookmarkListeners)
       listener.onBookmarkSearchResultsEnd(bookmarkIds, timestamp);
     mBookmarkListeners.finishIterate();
@@ -136,7 +136,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   public boolean search(@NonNull Context context, String query, boolean isCategory,
                         long timestamp, boolean hasLocation, double lat, double lon)
   {
-    Logger.i("HUGO", "search Hugo query: " + query + ", lat: " + lat + ", lon: " + lon);
+    Logger.i("HUGO Tranqueras", "search Hugo query: " + query + ", lat: " + lat + ", lon: " + lon);
     // Change here HUGO => Write here the logic to pull from the api and filter, store data for offline search
     // Test if we are offline in that case only show results previusly stored here
     // we can save searchs in the profile or directly download and refresh whe user logs in
@@ -157,7 +157,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   public void searchInteractive(@NonNull String query, boolean isCategory, @NonNull String locale,
                                 long timestamp, boolean isMapAndTable, boolean hasLocation, double lat, double lon)
   {
-    Logger.i("HUGO", "searchInteractive Hugo query: " + query + ", lat: " + lat + ", lon: " + lon);
+    Logger.i("HUGO Tranqueras", "searchInteractive Hugo query: " + query + ", lat: " + lat + ", lon: " + lon);
 //    nativeRunInteractiveSearch(query.getBytes(StandardCharsets.UTF_8), isCategory,
 //            locale, timestamp, isMapAndTable, hasLocation, lat, lon);
   }
@@ -179,7 +179,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   @MainThread
   public static void searchMaps(@NonNull Context context, String query, long timestamp)
   {
-    Logger.i("HUGO", "searchMaps Hugo query: " + query);
+    Logger.i("HUGO Tranqueras", "searchMaps Hugo query: " + query);
 //    nativeRunSearchMaps(query.getBytes(StandardCharsets.UTF_8), Language.getKeyboardLocale(context),
 //                        timestamp);
   }
@@ -187,7 +187,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   @MainThread
   public boolean searchInBookmarks(@NonNull String query, long categoryId, long timestamp)
   {
-    Logger.i("HUGO", "searchInBookmarks Hugo query: " + query + ", categoryid: " + categoryId);
+    Logger.i("HUGO Tranqueras", "searchInBookmarks Hugo query: " + query + ", categoryid: " + categoryId);
     return true;
 //    return nativeRunSearchInBookmarks(query.getBytes(StandardCharsets.UTF_8), categoryId, timestamp);
   }
@@ -213,7 +213,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   @MainThread
   private static void cancelApiCall()
   {
-    Logger.i("HUGO","Framework.nativeClearApiPoints");
+    Logger.i("HUGO Tranqueras","Framework.nativeClearApiPoints");
 //    Framework.nativeClearApiPoints();
   }
 
@@ -221,7 +221,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   public void cancelInteractiveSearch()
   {
     mQuery = "";
-    Logger.i("HUGO","nativeCancelInteractiveSearch");
+    Logger.i("HUGO Tranqueras","nativeCancelInteractiveSearch");
 //    nativeCancelInteractiveSearch();
   }
 
@@ -229,7 +229,7 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   private void cancelAllSearches()
   {
     mQuery = "";
-    Logger.i("HUGO","nativeCancelAllSearches");
+    Logger.i("HUGO Tranqueras","nativeCancelAllSearches");
 //    nativeCancelAllSearches();
   }
 
@@ -237,13 +237,13 @@ public enum TranquerasSearchEngine implements NativeSearchListener,
   public void showResult(int index)
   {
     mQuery = "";
-    Logger.i("HUGO","nativeShowResult");
+    Logger.i("HUGO Tranqueras","nativeShowResult");
 //    nativeShowResult(index);
   }
 
   public void initialize()
   {
-    Logger.i("HUGO","nativeInit");
+    Logger.i("HUGO Tranqueras","nativeInit");
 //    nativeInit();
   }
 

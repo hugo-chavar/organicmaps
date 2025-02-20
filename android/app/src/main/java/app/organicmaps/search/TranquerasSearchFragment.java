@@ -88,7 +88,7 @@ public class TranquerasSearchFragment
         return;
 
 //      TODO HUGO aca arranca la busqueda. Tenemos que cambiar el motor de busqueda
-      Logger.i("HUGO", "Test message Hugo: " + query);
+      Logger.i("HUGO Tranqueras", "Test message Hugo: " + query);
       if (TextUtils.isEmpty(query))
       {
         mSearchAdapter.clear();
@@ -354,7 +354,7 @@ public class TranquerasSearchFragment
       v.removeOnScrollListener(mRecyclerListener);
 
     mAttachedRecyclers.clear();
-    SearchEngine.INSTANCE.removeListener(this);
+    TranquerasSearchEngine.INSTANCE.removeListener(this);
     super.onDestroy();
   }
 
@@ -404,8 +404,8 @@ public class TranquerasSearchFragment
     final String query = getQuery();
     if (Config.isSearchHistoryEnabled())
       SearchRecents.add(query, requireContext());
-    SearchEngine.INSTANCE.cancel();
-    SearchEngine.INSTANCE.setQuery(query);
+    TranquerasSearchEngine.INSTANCE.cancel();
+    TranquerasSearchEngine.INSTANCE.setQuery(query);
 
     if (RoutingController.get().isWaitingPoiPick())
     {
@@ -418,7 +418,7 @@ public class TranquerasSearchFragment
     }
     else
     {
-      SearchEngine.INSTANCE.showResult(resultIndex);
+      TranquerasSearchEngine.INSTANCE.showResult(resultIndex);
     }
 
     mToolbarController.deactivate();
@@ -431,19 +431,19 @@ public class TranquerasSearchFragment
   {
     // The previous search should be cancelled before the new one is started, since previous search
     // results are no longer needed.
-    SearchEngine.INSTANCE.cancel();
+    TranquerasSearchEngine.INSTANCE.cancel();
 
     final String query = getQuery();
     if (Config.isSearchHistoryEnabled())
       SearchRecents.add(query, requireContext());
     mLastQueryTimestamp = System.nanoTime();
 
-    SearchEngine.INSTANCE.searchInteractive(
+    TranquerasSearchEngine.INSTANCE.searchInteractive(
         query, isCategory(), !TextUtils.isEmpty(mInitialLocale)
                ? mInitialLocale : app.organicmaps.util.Language.getKeyboardLocale(requireContext()),
         mLastQueryTimestamp, false /* isMapAndTable */);
 
-    SearchEngine.INSTANCE.setQuery(query);
+    TranquerasSearchEngine.INSTANCE.setQuery(query);
     Utils.navigateToParent(requireActivity());
   }
 
@@ -463,7 +463,7 @@ public class TranquerasSearchFragment
 
   private void stopSearch()
   {
-    SearchEngine.INSTANCE.cancel();
+    TranquerasSearchEngine.INSTANCE.cancel();
     updateSearchView();
   }
 
@@ -477,25 +477,25 @@ public class TranquerasSearchFragment
   {
     // The previous search should be cancelled before the new one is started, since previous search
     // results are no longer needed.
-    SearchEngine.INSTANCE.cancel();
+    TranquerasSearchEngine.INSTANCE.cancel();
 
     mLastQueryTimestamp = System.nanoTime();
     if (isTabletSearch())
     {
       // We will not support this for now, don't understand what interactive could mean here
-      SearchEngine.INSTANCE.searchInteractive(requireContext(), getQuery(), isCategory(),
+      TranquerasSearchEngine.INSTANCE.searchInteractive(requireContext(), getQuery(), isCategory(),
               mLastQueryTimestamp, true /* isMapAndTable */);
     }
     else
     {
-      if (!SearchEngine.INSTANCE.search(requireContext(), getQuery(), isCategory(),
+      if (!TranquerasSearchEngine.INSTANCE.search(requireContext(), getQuery(), isCategory(),
               mLastQueryTimestamp, mLastPosition.valid, mLastPosition.lat, mLastPosition.lon))
       {
-        Logger.i("HUGO", "RETURNS HUGO");
+        Logger.i("HUGO Tranqueras", "RETURNS HUGO");
         return;
       }
     }
-    Logger.i("HUGO", "mSearchRunning HUGO");
+    Logger.i("HUGO Tranqueras", "mSearchRunning HUGO");
     // the search was fired, now the search engine will update the search fragment because it is listening
     mSearchRunning = true;
     mToolbarController.showProgress(true);
@@ -508,7 +508,7 @@ public class TranquerasSearchFragment
   @Override
   public void onResultsUpdate(@NonNull SearchResult[] results, long timestamp)
   {
-    Logger.i("HUGO", "onResultsUpdate HUGO");
+    Logger.i("HUGO Tranqueras", "onResultsUpdate HUGO");
     if (!isAdded() || !mToolbarController.hasQuery())
       return;
 
@@ -526,7 +526,7 @@ public class TranquerasSearchFragment
   @Override
   public void onSearchCategorySelected(@Nullable String category)
   {
-    Logger.i("HUGO", "onSearchCategorySelected HUGO: " + category);
+    Logger.i("HUGO Tranqueras", "onSearchCategorySelected HUGO: " + category);
     mToolbarController.setQuery(category, true);
   }
 
@@ -534,9 +534,9 @@ public class TranquerasSearchFragment
   {
     mSearchRunning = true;
     if (results.length > 0)
-      Logger.i("HUGO", "refreshSearchResults HUGO: " + results[0]);
+      Logger.i("HUGO Tranqueras", "refreshSearchResults HUGO: " + results[0]);
     else
-      Logger.i("HUGO", "refreshSearchResults HUGO: sin resultados");
+      Logger.i("HUGO Tranqueras", "refreshSearchResults HUGO: sin resultados");
     updateFrames();
     mSearchAdapter.refreshData(results);
     mToolbarController.showProgress(true);

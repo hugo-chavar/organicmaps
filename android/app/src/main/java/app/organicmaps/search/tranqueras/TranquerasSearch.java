@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import app.organicmaps.bookmarks.data.FeatureId;
 import app.organicmaps.search.NativeSearchListener;
@@ -38,7 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TranquerasSearch {
 
     public interface TranquerasApiService {
-        @GET("data")
+        @GET("bjuarez/tranqueras")
         Call<ResponseBody> fetchData();
     }
 
@@ -51,7 +52,7 @@ public class TranquerasSearch {
 
     public TranquerasSearch(NativeSearchListener listener) {
         this.listener = listener;
-        this.executorService = Executors.newSingleThreadExecutor();
+        this.executorService = Executors.newFixedThreadPool(2);
     }
 
     public void search(@NonNull Context context, String query) {
@@ -63,16 +64,20 @@ public class TranquerasSearch {
         // 3) and listener.onResultsEnd
         // public void onResultsEnd(final long timestamp)
         // Submit the task to the background thread
+        Logger.i("HUGO Tranqueras", "STARTS TRANQUERAS SEARCH");
         executorService.submit(() -> {
             try {
                 TranquerasDatabase db = TranquerasDatabase.getInstance(context);
+                Logger.i("HUGO Tranqueras", "Ok database");
                 // check if the first actualizacion is valid
                 List<Actualizacion> actualizaciones = db.actualizacionDao().getAll();
+                Logger.i("HUGO Tranqueras", "actualizaciones");
                 Instant instant = Instant.now();
                 long timeStampMillis = instant.toEpochMilli();
                 if (actualizaciones.isEmpty()) {
                     // this will not work the first time
                     // Put a flag "loading" to avoid duplicate call
+                    Logger.i("HUGO Tranqueras", "actualizaciones empty");
                     fetchTranqueras(context);
 
                     // we could 1) send here and empty result to avoid the UI to hang
@@ -87,21 +92,27 @@ public class TranquerasSearch {
                     // the search and the threads should wait until "loading is false"
                     // for now we are doing 1)
                 } else if (actualizaciones.get(0).isValid()) {
+                    Logger.i("HUGO Tranqueras", "actualizaciones.get(0).isValid");
                     List<Tranquera> tranqueras = db.tranqueraDao().getAll();
-                    int resultsSize = 3; // tranqueras.size()
+
+                    List<Tranquera> filteredTranqueras = tranqueras.stream()
+                        .filter(tranquera -> tranquera.toString().contains(query))
+                        .collect(Collectors.toList());
+                    int resultsSize = filteredTranqueras.size();
 
                     SearchResult[] results = new SearchResult[resultsSize];
 
                     for (int i = 0; i < resultsSize; i++) {
-                        results[i] = tranqueraToSearchResult(tranqueras.get(i));
+                        results[i] = tranqueraToSearchResult(filteredTranqueras.get(i));
                     }
                     listener.onResultsUpdate(results, timeStampMillis);
                     listener.onResultsEnd(timeStampMillis);
 
                 }
+                Logger.i("HUGO Tranqueras", "fin");
 
             } catch (Exception e) {
-                Logger.e("HUGO","HUGO Error1: " + e.getMessage());
+                Logger.e("HUGO Tranqueras","HUGO Error1: " + e.getMessage());
             }
         });
     }
@@ -109,6 +120,7 @@ public class TranquerasSearch {
     private SearchResult tranqueraToSearchResult(Tranquera tranquera) {
         FeatureId featureId = FeatureId.EMPTY;
         Distance distance = Distance.EMPTY;
+        Logger.i("HUGO Tranqueras", "tranqueraToSearchResult");
         SearchResult.Description desc = new SearchResult.Description(featureId, "Dummy_featureType", "Dummy_region", distance,
                                                 tranquera.getDescription(), 0, 0, 0, false);
         // Description(FeatureId featureId, String featureType, String region, Distance distance,
@@ -125,40 +137,48 @@ public class TranquerasSearch {
     }
 
     private void fetchTranqueras(@NonNull Context context) {
+        Logger.i("HUGO Tranqueras", "fetchTranqueras");
         Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.bordergis.com/bjuarez/tranqueras/")
+            .baseUrl("https://api.bordergis.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
         TranquerasApiService apiService = retrofit.create(TranquerasApiService.class);
         Call<ResponseBody> call = apiService.fetchData();
+        Logger.i("HUGO Tranqueras", "call");
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    List<Tranquera> tranqueras = null;
+                    Logger.i("HUGO Tranqueras", "response.isSuccessful");
+                    final List<Tranquera> tranqueras;
                     try {
                         tranqueras = parseResponse(response.body().string());
+                        Logger.i("HUGO Tranqueras", "parseResponse ok");
                     } catch (IOException e) {
-                        Logger.e("HUGO","HUGO Error0: " + e.getMessage());
+                        Logger.e("HUGO Tranqueras","HUGO Error0: " + e.getMessage());
                         return;
                     }
                     // runOnUiThread(() -> listener.onSuccess(parsedResult));
                     // listener.onSuccess(parsedResult);
-                    TranquerasDatabase db = TranquerasDatabase.getInstance(context);
+                    executorService.submit(() -> {
+                        TranquerasDatabase db = TranquerasDatabase.getInstance(context);
+                        Logger.i("HUGO Tranqueras", "db.tranqueraDao().insert");
 
-                    for (Tranquera t: tranqueras) {
-                        db.tranqueraDao().insert(t);
-                    }
+                        for (Tranquera t: tranqueras) {
+                            db.tranqueraDao().insert(t);
+                        }
 
-                    Instant instant = Instant.now();
-                    long timeStampMillis = instant.toEpochMilli();
+                        Instant instant = Instant.now();
+                        long timeStampMillis = instant.toEpochMilli();
 
-                    db.actualizacionDao().insert(new Actualizacion(timeStampMillis));
+                        db.actualizacionDao().insert(new Actualizacion(timeStampMillis));
+                        Logger.i("HUGO Tranqueras", "db.actualizacionDao().insert");
+                    });
                 } else {
                     // runOnUiThread(() -> listener.onFailure("API call failed"));
                     // listener.onFailure("API call failed");
-                    Logger.e("HUGO","HUGO Error2: " + response.toString());
+                    Logger.e("HUGO Tranqueras","HUGO Error2: " + response.toString());
                 }
             }
 
@@ -166,7 +186,7 @@ public class TranquerasSearch {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 // runOnUiThread(() -> listener.onFailure(t.getMessage()));
                 // listener.onFailure(t.getMessage());
-                Logger.e("HUGO","HUGO Error3: " + t.getMessage());
+                Logger.e("HUGO Tranqueras","HUGO Error3: " + t.getMessage());
             }
         });
     }
