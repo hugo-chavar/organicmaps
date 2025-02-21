@@ -33,6 +33,13 @@ public class HelpFragment extends BaseMwmFragment implements View.OnClickListene
   private TextView setupItem(@IdRes int id, boolean tint, @NonNull View frame)
   {
     final TextView view = frame.findViewById(id);
+    // view is null here, check the id and fix it
+    // java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setOnClickListener(android.view.View$OnClickListener)' on a null object reference
+    if (view == null) {
+      String msg = "view id " + id + " does not exists";
+      // error: java.lang.RuntimeException: view id 2131362399 does not exists
+      throw new RuntimeException(msg);
+    }
     view.setOnClickListener(this);
     if (tint)
       Graphics.tint(view);
