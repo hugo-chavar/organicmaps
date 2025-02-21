@@ -24,6 +24,7 @@ import app.organicmaps.util.Graphics;
 import app.organicmaps.util.SharingUtils;
 import app.organicmaps.util.Utils;
 import app.organicmaps.util.WindowInsetUtils.ScrollableContentInsetsListener;
+import app.organicmaps.util.log.Logger;
 
 public class HelpFragment extends BaseMwmFragment implements View.OnClickListener
 {
@@ -62,19 +63,71 @@ public class HelpFragment extends BaseMwmFragment implements View.OnClickListene
     if (osmPresentationView != null)
       osmPresentationView.setText(getString(R.string.osm_presentation, dataVersion));
 
-    setupItem(R.id.news, true, root);
-    setupItem(R.id.web, true, root);
-    setupItem(R.id.email, true, root);
-    setupItem(R.id.github, true, root);
-    setupItem(R.id.telegram, false, root);
-    setupItem(R.id.instagram, false, root);
-    setupItem(R.id.facebook, false, root);
-    setupItem(R.id.twitter, true, root);
-    setupItem(R.id.matrix, true, root);
-    setupItem(R.id.mastodon, false, root);
-    setupItem(R.id.openstreetmap, true, root);
-    setupItem(R.id.faq, true, root);
-    setupItem(R.id.report, isLandscape, root);
+    try {
+        setupItem(R.id.news, true, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "news");
+    }
+    try {
+        setupItem(R.id.web, true, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "web");
+    }
+    try {
+        setupItem(R.id.email, true, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "email");
+    }
+    try {
+        setupItem(R.id.github, true, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "github");
+    }
+    try {
+        setupItem(R.id.telegram, false, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "telegram");
+    }
+    try {
+        setupItem(R.id.instagram, false, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "ig");
+    }
+    try {
+        setupItem(R.id.facebook, false, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "fb");
+    }
+    try {
+        setupItem(R.id.twitter, true, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "tw");
+    }
+    try {
+        setupItem(R.id.matrix, true, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "matrix");
+    }
+    try {
+        setupItem(R.id.mastodon, false, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "mastodo");
+    }
+    try {
+        setupItem(R.id.openstreetmap, true, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "openstreet");
+    }
+    try {
+        setupItem(R.id.faq, true, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "faq");
+    }
+    try {
+        setupItem(R.id.report, isLandscape, root);
+    } catch (Exception e) {
+      Logger.e("HUGO", "report");
+    }
 
     final TextView supportUsView = root.findViewById(R.id.support_us);
     if (BuildConfig.FLAVOR.equals("google") && !TextUtils.isEmpty(mDonateUrl))
