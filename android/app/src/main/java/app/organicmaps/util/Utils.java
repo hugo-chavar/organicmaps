@@ -636,14 +636,16 @@ public class Utils
   }
 
   // Called from JNI.
+  // Ok ok, this is called from C++ check where do this calls
   @Keep
   @SuppressWarnings("unused")
   @NonNull
   public static String getLocalizedFeatureType(@NonNull Context context, @Nullable String type)
   {
+    // example type: shop-clothes
     if (TextUtils.isEmpty(type))
       return "";
-
+    // key => type.shop.clothes => ver en los archivos las traducciones
     String key = "type." + type.replace('-', '.')
                                .replace(':', '_');
     return getLocalizedFeatureByKey(context, key);

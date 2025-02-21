@@ -36,6 +36,7 @@ import app.organicmaps.util.SharedPropertiesUtils;
 import app.organicmaps.util.UiUtils;
 import app.organicmaps.util.Utils;
 import app.organicmaps.util.WindowInsetUtils;
+import app.organicmaps.util.log.Logger;
 import app.organicmaps.widget.PlaceholderView;
 import app.organicmaps.widget.SearchToolbarController;
 import com.google.android.material.appbar.AppBarLayout;
@@ -53,6 +54,7 @@ public class SearchFragment extends BaseMwmFragment
   private long mLastQueryTimestamp;
   @NonNull
   private final List<HiddenCommand> mHiddenCommands = new ArrayList<>();
+  private static final String TAG = SearchFragment.class.getSimpleName();
 
   private static class LastPosition
   {
@@ -81,6 +83,8 @@ public class SearchFragment extends BaseMwmFragment
       if (!isAdded())
         return;
 
+//      TODO HUGO aca arranca la busqueda. Tenemos que cambiar el motor de busqueda
+      Logger.i("HUGO", "Test message Hugo: " + query);
       if (TextUtils.isEmpty(query))
       {
         mSearchAdapter.clear();
@@ -262,7 +266,8 @@ public class SearchFragment extends BaseMwmFragment
     mToolbarController = new ToolbarController(view);
     TabLayout tabLayout = root.findViewById(R.id.tabs);
 
-    if (Config.isSearchHistoryEnabled())
+    // TODO remove changes
+    if (!Config.isSearchHistoryEnabled())
       tabLayout.setVisibility(View.VISIBLE);
     else
       tabLayout.setVisibility(View.GONE);
@@ -469,6 +474,7 @@ public class SearchFragment extends BaseMwmFragment
   {
     // The previous search should be cancelled before the new one is started, since previous search
     // results are no longer needed.
+    // Check if we can cancell the API call.. check what does this method maybe has several steps and can cancel in the middle
     SearchEngine.INSTANCE.cancel();
 
     mLastQueryTimestamp = System.nanoTime();
@@ -482,10 +488,12 @@ public class SearchFragment extends BaseMwmFragment
       if (!SearchEngine.INSTANCE.search(requireContext(), getQuery(), isCategory(),
               mLastQueryTimestamp, mLastPosition.valid, mLastPosition.lat, mLastPosition.lon))
       {
+        Logger.i("HUGO", "RETURNS HUGO");
         return;
       }
     }
-
+    Logger.i("HUGO", "mSearchRunning HUGO");
+    // the search was fired, now the search engine will update the search fragment because it is listening
     mSearchRunning = true;
     mToolbarController.showProgress(true);
 
@@ -497,6 +505,7 @@ public class SearchFragment extends BaseMwmFragment
   @Override
   public void onResultsUpdate(@NonNull SearchResult[] results, long timestamp)
   {
+    Logger.i("HUGO", "onResultsUpdate HUGO");
     if (!isAdded() || !mToolbarController.hasQuery())
       return;
 
@@ -514,12 +523,17 @@ public class SearchFragment extends BaseMwmFragment
   @Override
   public void onSearchCategorySelected(@Nullable String category)
   {
+    Logger.i("HUGO", "onSearchCategorySelected HUGO: " + category);
     mToolbarController.setQuery(category, true);
   }
 
   private void refreshSearchResults(@NonNull SearchResult[] results)
   {
     mSearchRunning = true;
+    if (results.length > 0)
+      Logger.i("HUGO", "refreshSearchResults HUGO: " + results[0]);
+    else
+      Logger.i("HUGO", "refreshSearchResults HUGO: sin resultados");
     updateFrames();
     mSearchAdapter.refreshData(results);
     mToolbarController.showProgress(true);

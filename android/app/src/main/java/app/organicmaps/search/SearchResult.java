@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 
 import app.organicmaps.bookmarks.data.FeatureId;
 import app.organicmaps.util.Distance;
+import app.organicmaps.util.log.Logger;
 
 /**
  * Class instances are created from native code.
@@ -64,6 +65,7 @@ public class SearchResult
       this.minutesUntilOpen = minutesUntilOpen;
       this.minutesUntilClosed = minutesUntilClosed;
       this.hasPopularityHigherPriority = hasPopularityHigherPriority;
+      Logger.i("HUGO", "Test SearchResult message Hugo description: " + description);
     }
   }
 
@@ -97,6 +99,7 @@ public class SearchResult
     this.highlightRanges = highlightRanges;
     this.descHighlightRanges = descHighlightRanges;
     mPopularity = Popularity.defaultInstance();
+    Logger.i("HUGO", "Test SearchResult message Hugo name: " + name);
   }
 
   public SearchResult(String name, Description description, double lat, double lon, int[] highlightRanges,
@@ -111,6 +114,7 @@ public class SearchResult
     this.description = description;
     this.highlightRanges = highlightRanges;
     this.descHighlightRanges = descHighlightRanges;
+    Logger.i("HUGO", "Test SearchResult message Hugo description : " + description + ", name: " + name);
   }
 
   @NonNull

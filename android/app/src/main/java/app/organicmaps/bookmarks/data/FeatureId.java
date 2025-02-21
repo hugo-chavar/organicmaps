@@ -51,9 +51,10 @@ public class FeatureId implements Parcelable
 
   public FeatureId(@NonNull String mwmName, long mwmVersion, int featureIndex)
   {
-    mMwmName = mwmName;
-    mMwmVersion = mwmVersion;
-    mFeatureIndex = featureIndex;
+    // maybe we can check this things if they are needed or just leave defaults
+    mMwmName = mwmName; // ex "Argentina_Buenos Aires_South"
+    mMwmVersion = mwmVersion; // example 241122 sounds like a date
+    mFeatureIndex = featureIndex; // 531787 strange number see what is used for
   }
 
   private FeatureId(Parcel in)
