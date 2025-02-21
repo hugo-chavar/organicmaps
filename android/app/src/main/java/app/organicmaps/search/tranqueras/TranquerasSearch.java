@@ -118,10 +118,20 @@ public class TranquerasSearch {
     }
 
     private SearchResult tranqueraToSearchResult(Tranquera tranquera) {
-        FeatureId featureId = FeatureId.EMPTY;
-        Distance distance = Distance.EMPTY;
+        //   public FeatureId(@NonNull String mwmName, long mwmVersion, int featureIndex)
+        //   {
+        //     // maybe we can check this things if they are needed or just leave defaults
+        //     mMwmName = mwmName; // ex "Argentina_Buenos Aires_South"
+        //     mMwmVersion = mwmVersion; // example 241122 sounds like a date
+        //     mFeatureIndex = featureIndex; // 531787 strange number see what is used for
+        //   }
+        // FeatureId featureId = FeatureId.EMPTY;
+        FeatureId featureId = new FeatureId("Argentina_Buenos Aires_South", 241122L, 531787);
+        //public Distance(double distance, @NonNull String distanceStr, byte unitsIndex)
+        // Distance distance = Distance.EMPTY;
+        Distance distance = new Distance(75.3, "86 met", (byte) 0);
         Logger.i("HUGO Tranqueras", "tranqueraToSearchResult");
-        SearchResult.Description desc = new SearchResult.Description(featureId, "Dummy_featureType", "Dummy_region", distance,
+        SearchResult.Description desc = new SearchResult.Description(featureId, "Dummy_featureType", "Argentina_Buenos Aires_South", distance,
                                                 tranquera.getDescription(), 0, 0, 0, false);
         // Description(FeatureId featureId, String featureType, String region, Distance distance,
         //                String description, int openNow, int minutesUntilOpen, int minutesUntilClosed,
